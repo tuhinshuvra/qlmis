@@ -1,4 +1,4 @@
-package org.bd.quantum.em_project;
+package org.bd.quantum.qlmis;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

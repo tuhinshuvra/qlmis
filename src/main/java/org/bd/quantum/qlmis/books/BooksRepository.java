@@ -1,9 +1,9 @@
-package org.bd.quantum.em_project;
+package org.bd.quantum.qlmis.books;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
+public interface BooksRepository extends JpaRepository<Books, Long> {
 
 }
