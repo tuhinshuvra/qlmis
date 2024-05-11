@@ -43,15 +43,22 @@ public class AuthorsServiceImpl implements AuthorsService {
 
     @Override
     public boolean deleteAuthor(long id) {
-        authorsRepository.deleteById(id);
-        return true;
+        Authors deleteAuthor=authorsRepository.findById(id).orElse(null);
+        if (deleteAuthor !=null){
+            authorsRepository.deleteById(id);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
     public String updateAuthor(long id, Authors authors) {
         Authors updateAuthor=authorsRepository.findById(id).orElse(null);
-        if(updateAuthor!=null){
-            BeanUtils.copyProperties(authors,updateAuthor);
+        if(updateAuthor != null){
+            updateAuthor.setName(authors.getName());
+            updateAuthor.setAddress(authors.getAddress());
+
             authorsRepository.save(updateAuthor);
             return "Author Updated Successfully";
         }else {

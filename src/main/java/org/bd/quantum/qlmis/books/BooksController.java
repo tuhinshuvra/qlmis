@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class BooksController {
 
     private final BooksService booksService;
@@ -26,8 +27,8 @@ public class BooksController {
     }
 
     @PostMapping("books")
-    public String createBook(@RequestBody Books employee ){
-        return booksService.createBook(employee);
+    public String createBook(@RequestBody Books books ){
+        return booksService.createBook(books);
     }
 
     @DeleteMapping("books/{id}")
@@ -36,7 +37,6 @@ public class BooksController {
         if(booksService.deleteBook(id)){
           return "Deleted Successfully";
       }
-
         return "Not Found";
     }
 
@@ -44,6 +44,5 @@ public class BooksController {
     public String updateBook (@PathVariable Long id, @RequestBody Books books ){
           return  booksService.updateBook(id,books);
       }
-
     }
 

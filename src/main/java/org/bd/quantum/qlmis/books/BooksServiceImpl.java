@@ -14,9 +14,9 @@ public class BooksServiceImpl implements BooksService {
     private BooksRepository booksRepository;
 
     @Override
-    public String createBook(Books books1) {
+    public String createBook(Books createBook) {
         Books books = new Books();
-        BeanUtils.copyProperties(books1, books);
+        BeanUtils.copyProperties(createBook, books);
         booksRepository.save(books);
         return "Book Saved Successfully";
     }
@@ -41,19 +41,31 @@ public class BooksServiceImpl implements BooksService {
 
     @Override
     public boolean deleteBook(long id) {
-        booksRepository.deleteById(id);
-        return true;
+        Books deleteBook = booksRepository.findById(id).orElse(null);
+        if (deleteBook != null){
+            booksRepository.deleteById(id);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
     public String updateBook(long id, Books books) {
         Books updateBook = booksRepository.findById(id).orElse(null);
-        if (updateBook != null) {
-            BeanUtils.copyProperties(books, updateBook);
+
+        if(updateBook != null){
+            updateBook.setName(books.getName());
+            updateBook.setAuthor(books.getAuthor());
+            updateBook.setPublisher(books.getPublisher());
+            updateBook.setDetails(books.getDetails());
+            updateBook.setPage(books.getPage());
+            updateBook.setPrice(books.getPrice());
+
             booksRepository.save(updateBook);
             return "Book Updated Successfully";
         } else {
-            return "Book Not Found";
+            return "Book not found";
         }
     }
 }

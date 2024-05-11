@@ -1,11 +1,13 @@
 package org.bd.quantum.qlmis.author;
 
+import org.bd.quantum.qlmis.books.Books;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuthorsController {
 
     private final AuthorsService authorsService;
@@ -27,6 +29,7 @@ public class AuthorsController {
 
     @PostMapping("authors")
     public String createAuthor(@RequestBody Authors authors ){
+
         return authorsService.createAuthor(authors);
     }
 
@@ -43,4 +46,3 @@ public class AuthorsController {
           return  authorsService.updateAuthor(id,authors);
       }
     }
-
